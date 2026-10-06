@@ -1,0 +1,26 @@
+name: Release
+
+# Publishes mini-orm-pool and mini-orm-core to GitHub Packages when a version tag is pushed.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          server-id: github
+      - name: Publish with sources and javadoc jars
+        run: ./mvnw -B -Prelease -DskipTests deploy -pl mini-orm-pool,mini-orm-core -am
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

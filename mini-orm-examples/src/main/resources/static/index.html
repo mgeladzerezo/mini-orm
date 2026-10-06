@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mini-orm blog example</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header><h1>mini-orm blog</h1><p>Posts, pool metrics and the SQL the ORM ran.</p></header>
+<main>
+  <section id="posts-panel"><h2>Posts</h2><div id="posts" aria-live="polite">Loading...</div>
+    <form id="new-post"><h3>New post</h3>
+      <input name="author" placeholder="Author" required>
+      <input name="title" placeholder="Title" required>
+      <textarea name="body" placeholder="Body"></textarea>
+      <button>Publish</button>
+    </form>
+  </section>
+  <section><h2>Pool</h2><dl id="metrics"></dl></section>
+  <section><h2>SQL log</h2><pre id="sql">Loading...</pre></section>
+</main>
+<script type="module" src="/app.js"></script>
+</body>
+</html>

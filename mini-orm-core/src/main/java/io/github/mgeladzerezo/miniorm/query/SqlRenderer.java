@@ -56,8 +56,8 @@ final class SqlRenderer {
             case Criterion.Compare<?> compare -> compare(compare, column, lhs, parameters);
             case Criterion.In<?> in -> in(in, column, lhs, parameters);
             case Criterion.Between<?> between -> {
-                parameters.add(operand(column, between.low()));
-                parameters.add(operand(column, between.high()));
+                parameters.add(operand(column, unwrap(between.low())));
+                parameters.add(operand(column, unwrap(between.high())));
                 yield lhs + " between ? and ?";
             }
             case Criterion.Null<?> isNull -> lhs + (isNull.negated() ? " is not null" : " is null");
@@ -69,7 +69,8 @@ final class SqlRenderer {
     }
 
     private String compare(Criterion.Compare<?> compare, ColumnMapping column, String lhs, List<Object> parameters) {
-        if (compare.value() == null) {
+        Object value = unwrap(compare.value());
+        if (value == null) {
             return switch (compare.operator()) {
                 case EQ -> lhs + " is null";
                 case NE -> lhs + " is not null";
@@ -77,8 +78,13 @@ final class SqlRenderer {
                         + compare.operator().sql() + " null; use isNull() / isNotNull() or eq(null)");
             };
         }
-        parameters.add(operand(column, compare.value()));
+        parameters.add(operand(column, value));
         return lhs + " " + compare.operator().sql() + " ?";
+    }
+
+    /** An {@code Optional<T>} property is compared by its content: empty means null. */
+    private static Object unwrap(Object value) {
+        return value instanceof java.util.Optional<?> optional ? optional.orElse(null) : value;
     }
 
     private String in(Criterion.In<?> in, ColumnMapping column, String lhs, List<Object> parameters) {
@@ -86,7 +92,7 @@ final class SqlRenderer {
             return in.negated() ? "1 = 1" : "1 = 0";
         }
         for (Object value : in.values()) {
-            parameters.add(operand(column, value));
+            parameters.add(operand(column, unwrap(value)));
         }
         return lhs + (in.negated() ? " not in (" : " in (") + "?, ".repeat(in.values().size() - 1) + "?)";
     }

@@ -1,0 +1,23 @@
+:root {
+  --bg: #fafaf8; --fg: #1c1c1a; --muted: #66665f; --card: #ffffff; --line: #deded8; --accent: #0b5fff;
+  --space: 16px; font: 16px/1.5 system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #131312; --fg: #ececE8; --muted: #9a9a92; --card: #1d1d1b; --line: #2f2f2c; --accent: #6b9bff; }
+}
+body { margin: 0; background: var(--bg); color: var(--fg); }
+header, main { max-width: 72rem; margin: 0 auto; padding: var(--space); }
+header p { color: var(--muted); margin: 0; }
+main { display: grid; gap: var(--space); grid-template-columns: 1fr; }
+@media (min-width: 60rem) { main { grid-template-columns: 2fr 1fr; } #posts-panel { grid-row: span 2; } }
+section { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: var(--space); min-width: 0; }
+h2 { margin-top: 0; font-size: 1.1rem; }
+article { border-top: 1px solid var(--line); padding: 8px 0; }
+article small, dt { color: var(--muted); }
+dl { display: grid; grid-template-columns: auto auto; gap: 4px var(--space); margin: 0; }
+dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+pre { overflow: auto; max-height: 24rem; font-size: 0.8rem; white-space: pre-wrap; word-break: break-word; }
+input, textarea, button { display: block; width: 100%; box-sizing: border-box; margin: 6px 0; padding: 8px;
+  font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; }
+button { background: var(--accent); color: #fff; border: 0; cursor: pointer; }
+.error { color: #c0392b; }

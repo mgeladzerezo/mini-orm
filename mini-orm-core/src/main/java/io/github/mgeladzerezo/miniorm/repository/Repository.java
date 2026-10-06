@@ -23,6 +23,9 @@ import java.util.Optional;
  * <p>A repository is bound to the session that created it and shares its transaction and
  * persistence context. See {@link RepositoryFactory} for the full grammar of derived finders.
  *
+ * <p>An interface that declares {@code default} methods must be public (the JDK cannot invoke
+ * default methods of a non-public interface through a proxy).
+ *
  * @param <T>  the entity type
  * @param <ID> the primary key type
  */
