@@ -4,6 +4,8 @@ A small ORM and a JDBC connection pool for Java 25, with no runtime dependencies
 
 [![CI](https://github.com/mgeladzerezo/mini-orm/actions/workflows/ci.yml/badge.svg)](https://github.com/mgeladzerezo/mini-orm/actions/workflows/ci.yml)
 
+> **CI result.** On 7 October 2026 the workflow ran the complete suite on GitHub Actions (Ubuntu, Docker available) and it passed: 245 tests on H2 and PostgreSQL, 0 failures ([run 37606192633](https://github.com/mgeladzerezo/mini-orm/actions/runs/37606192633)). The verification notes further down describe what had been run on this machine before that and are kept for the record.
+
 ## Example
 
 ```java
