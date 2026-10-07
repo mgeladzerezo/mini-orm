@@ -97,9 +97,9 @@ All suites below run both on H2 and on PostgreSQL 16 (Testcontainers, `postgres:
 
 ## Known limitations
 
-**Verification status, stated plainly.** The test suite was written but was not executed in the final pass, and the Docker image and compose file were never built or started.
+**Verification status, stated plainly.** The test suite in its final form has not been executed, and the Docker image and compose file were never built or started.
 
-* Executed earlier, before the no-execution rule: the `mini-orm-pool` suite (all nine classes passed, including the PostgreSQL recovery test); `SessionCoreTest` and `OptimisticLockingTest` on H2 and PostgreSQL (commit `feat(core): sessions with dirty checking...`); `LazyLoadingTest` and `QueryTest` on H2 only, and `RepositoryTest` on H2 where one test failed because a package-private repository interface cannot have default methods invoked through a proxy. That failure was fixed in the test and in the Javadoc afterwards but not re-run.
+* Executed earlier, on earlier revisions of the code: the `mini-orm-pool` suite (all nine classes passed, including the PostgreSQL recovery test); `SessionCoreTest` and `OptimisticLockingTest` on H2 and PostgreSQL (commit `feat(core): sessions with dirty checking...`); `LazyLoadingTest` and `QueryTest` on H2 only, and `RepositoryTest` on H2 where one test failed because a package-private repository interface cannot have default methods invoked through a proxy. That failure was fixed in the test and in the Javadoc afterwards but not re-run.
 * Never executed: `SchemaTest`, PostgreSQL runs of `LazyLoadingTest`, `QueryTest` and `RepositoryTest` (Docker became unavailable), the example application, the Dockerfile, `docker-compose.yml`, the CI and release workflows.
 * The HikariCP benchmark (`docs/pool.md`) was never run. No benchmark numbers are given anywhere in this repository: **not yet measured**.
 * Not supported: composite keys, inheritance, `@ManyToMany`, `@OneToOne`, cascading, filtering on a property of an associated entity, fetching more than one level, databases other than PostgreSQL and H2, schema migration.
